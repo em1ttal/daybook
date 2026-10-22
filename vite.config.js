@@ -7,7 +7,7 @@ import vueDevTools from 'vite-plugin-vue-devtools'
 
 // https://vite.dev/config/
 export default defineConfig({
-  base: '/FH-p4-b3/',
+  base: '/daybook/',
   plugins: [vue(), vueJsx(), vueDevTools()],
   resolve: {
     alias: {
