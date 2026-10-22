@@ -1,0 +1,124 @@
+/*
+ * daybook design tokens. See docs/STYLE_GUIDE.md for usage rules and contrast ratios.
+ * Components use only the semantic tokens (--color-*, --space-*, ...), never raw hex values.
+ * Theme selection: follows the OS by default; set <html data-theme="light|dark"> to force one.
+ * Not imported yet: applying it to the app is an M4 task.
+ */
+
+:root {
+  /* Brand palette (raw values, referenced only by the semantic tokens below) */
+  --ivory: #f4f6e8;
+  --ivory-raised: #fbfcf5;
+  --fern: #5f8651;
+  --fern-deep: #476a3c;
+  --fern-tint: #dce7d3;
+  --forest-ink: #1f2a1c;
+  --moss-grey: #55604f;
+  --dim-grey: #6f6e6a;
+  --dim-grey-deep: #4a4946;
+  --dim-grey-hover: #5a5955;
+  --lavender: #e5e6fa;
+  --lavender-tint: #c9cbef;
+  --lavender-mist: #d2d3e8;
+  --ghost-white: #fafaff;
+  --night-ink: #2e2d3a;
+
+  /* Light theme (default) */
+  --color-bg: var(--ivory);
+  --color-surface: var(--ivory-raised);
+  --color-surface-hover: #eef1df;
+  --color-border: #d5dbc6;
+  --color-text: var(--forest-ink);
+  --color-text-muted: var(--moss-grey);
+  --color-accent: var(--fern);
+  --color-accent-text: var(--fern-deep);
+  --color-accent-tint: var(--fern-tint);
+  --color-on-accent-tint: var(--forest-ink);
+  --color-primary-bg: var(--fern-deep);
+  --color-primary-bg-hover: #3b5932;
+  --color-on-primary: #ffffff;
+  --color-focus: var(--fern);
+  --color-danger: #b42318;
+  --color-warning: #8a5a00;
+  --shadow-card: 0 1px 2px rgb(31 42 28 / 0.06), 0 4px 12px rgb(31 42 28 / 0.06);
+  color-scheme: light;
+
+  /* Theme-independent tokens */
+  --font-sans: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  --font-mono: ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
+  --text-xs: 0.75rem;
+  --text-sm: 0.875rem;
+  --text-base: 1rem;
+  --text-lg: 1.125rem;
+  --text-xl: 1.375rem;
+  --text-2xl: 1.75rem;
+  --text-3xl: 2.25rem;
+  --leading-tight: 1.25;
+  --leading-normal: 1.5;
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-6: 1.5rem;
+  --space-8: 2rem;
+  --space-12: 3rem;
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 16px;
+  --radius-pill: 999px;
+  --duration-fast: 120ms;
+  --duration-base: 200ms;
+  --ease-out: cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+/* Dark theme: Dim Grey surfaces on a deeper grey page, Lavender for text and accents */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme='light']) {
+    --color-bg: var(--dim-grey-deep);
+    --color-surface: var(--dim-grey);
+    --color-surface-hover: var(--dim-grey-hover);
+    --color-border: #85847f;
+    --color-text: var(--ghost-white);
+    --color-text-muted: var(--lavender-mist);
+    --color-accent: var(--lavender);
+    --color-accent-text: var(--lavender);
+    --color-accent-tint: var(--lavender-tint);
+    --color-on-accent-tint: var(--night-ink);
+    --color-primary-bg: var(--lavender);
+    --color-primary-bg-hover: #f2f2fd;
+    --color-on-primary: var(--night-ink);
+    --color-focus: var(--lavender);
+    --color-danger: #ffc2b8;
+    --color-warning: #f3d58f;
+    --shadow-card: 0 1px 2px rgb(0 0 0 / 0.2), 0 4px 12px rgb(0 0 0 / 0.18);
+    color-scheme: dark;
+  }
+}
+
+:root[data-theme='dark'] {
+  --color-bg: var(--dim-grey-deep);
+  --color-surface: var(--dim-grey);
+  --color-surface-hover: var(--dim-grey-hover);
+  --color-border: #85847f;
+  --color-text: var(--ghost-white);
+  --color-text-muted: var(--lavender-mist);
+  --color-accent: var(--lavender);
+  --color-accent-text: var(--lavender);
+  --color-accent-tint: var(--lavender-tint);
+  --color-on-accent-tint: var(--night-ink);
+  --color-primary-bg: var(--lavender);
+  --color-primary-bg-hover: #f2f2fd;
+  --color-on-primary: var(--night-ink);
+  --color-focus: var(--lavender);
+  --color-danger: #ffc2b8;
+  --color-warning: #f3d58f;
+  --shadow-card: 0 1px 2px rgb(0 0 0 / 0.2), 0 4px 12px rgb(0 0 0 / 0.18);
+  color-scheme: dark;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --duration-fast: 0ms;
+    --duration-base: 0ms;
+  }
+}
