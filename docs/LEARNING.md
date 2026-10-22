@@ -98,6 +98,22 @@ Short records in the format *context → options → choice → why*. New decisi
 ### D7 · Visual identity: Ivory/Fern light, Dim Grey/Lavender dark (2026-10-23)
 - **Why:** a calm, natural palette for an app that stays open all day. Measured contrast changed how the colours are used: small Fern text on Ivory fails WCAG AA (3.83:1), so small text and buttons use a darker *Fern Deep*. Lavender on Dim Grey is about 4.1:1, so the dark page uses a deeper grey and Dim Grey becomes the card colour. Details: [STYLE_GUIDE.md](STYLE_GUIDE.md).
 
+### D8 · Multilingual from the start (2026-10-23)
+- **Context:** the old UI is hard-coded in Spanish, the portfolio audience is international, and I want daybook to support more languages later.
+- **Options:** hard-code English now and add i18n "later", or plan for it from the start.
+- **Choice:** from the start. Every user-facing string lives in a per-language JSON file (`web/src/locales/en.json`, `es.json`) and is looked up by key with `vue-i18n`. English is the source language. The API returns stable error *codes* instead of sentences, so each client translates them. Docs are written in English, with translations as separate files (`README.es.md`, `docs/es/…`).
+- **Why:** pulling strings out of hundreds of components afterwards is slow and easy to get wrong. Doing it as each component is touched costs almost nothing. Keeping the API language-neutral means the iOS/macOS apps can use their own string catalogs without any server changes.
+
+### D9 · Testing strategy: a test pyramid, tests written with each feature (2026-10-23)
+- **Context:** the project has no tests, and learning to test a backend and a frontend properly is one of my goals.
+- **Choice:** Go unit tests for pure logic, and Go integration tests (real router + real Postgres test database) as the main layer for the API, with responses checked against the OpenAPI spec. On the web, Vitest + Vue Test Utils, with MSW faking the API. A few Playwright end-to-end tests at the end. Tests go in the same PR as the feature.
+- **Why:** integration tests against a real database catch the bugs that matter here (wrong SQL, a missing `user_id` filter, a broken transaction). Mocking the database would hide exactly those. Many fast tests at the bottom and a few slow ones at the top keep the suite fast enough to run on every change. See [test pyramid](#test-pyramid).
+
+### D10 · CI: delete the inherited workflow and rebuild it by hand (2026-10-23)
+- **Context:** the course project shipped a copied GitHub Pages workflow (Node 18, deleted the lockfile before installing).
+- **Choice:** remove it now. Write CI from scratch in steps: a server job at the end of M2, a web job in M3, end-to-end tests and a demo deploy in M5.
+- **Why:** I want to understand every line of the pipeline, not maintain a template I didn't write. Building it one job at a time makes each concept (triggers, runners, caching, service containers) its own lesson. See [CI](#ci-continuous-integration).
+
 ---
 
 ## 4. Milestones
@@ -111,7 +127,11 @@ Every chapter uses the same template: **Goal · What I built · Concepts · Try 
 - **What I built:** _(to be filled in)_ Renamed the project to **daybook**, moved the Vue app with `git mv`, set up npm workspaces for `web/`, a Go module in `server/`, and a root Makefile.
 - **Concepts:** _`git mv` and why it keeps file history · monorepos and workspaces · `.editorconfig` / `.nvmrc`_
 - **Try it yourself:** _(commands)_
-- **Gotchas:** renaming the GitHub repo redirects Git URLs but **not** GitHub Pages, so Vite's `base` path had to change from `/FH-p4-b3/` to `/daybook/`.
+- **Gotchas:**
+  - Renaming the GitHub repo redirects Git URLs but **not** GitHub Pages, so Vite's `base` path had to change from `/FH-p4-b3/` to `/daybook/`.
+  - After moving the folder, my local `dev` branch was still tracking `origin/main`, so a plain `git push` went to `main`. Check with `git status -sb` (it shows `dev...origin/dev`) and fix with `git branch --set-upstream-to=origin/dev`.
+  - Undoing that push meant moving `main` back with `git push --force-with-lease`. A `git revert` would have been wrong here: when `dev` is merged later, the revert commit would silently undo dev's changes. `--force-with-lease` only overwrites the branch if it is still at the commit you expect.
+  - Any push to `main`, including a force push, re-runs the workflows triggered by it. Moving `main` back rebuilt the old Pages site with the old `base` path and broke the live demo. Workflows react to *every* push, not just the ones you meant.
 - **What I'd do differently:** _(to be filled in)_
 
 ### M1 · Local database
@@ -120,8 +140,12 @@ Every chapter uses the same template: **Goal · What I built · Concepts · Try 
 ### M2 · API
 *Status: not started*
 
+_Will cover: Go unit and integration tests, a test database, checking responses against the spec, and the first hand-written GitHub Actions workflow._
+
 ### M3 · Frontend on the real API
 *Status: not started*
+
+_Will cover: setting up `vue-i18n` and locale JSON files, Vitest + Vue Test Utils + MSW, and adding a web job to CI._
 
 ### M4 · Planner pivot
 *Status: not started*
@@ -150,6 +174,15 @@ Browsers block JavaScript on `site-a.com` from reading responses from `api.site-
 ### Go context
 `context.Context` is passed as the first argument through every layer of a request. It carries a deadline or cancellation signal (if the browser disconnects, the database query is cancelled too) and request-scoped values such as the authenticated user's id.
 
+### i18n (internationalisation)
+Building software so it can be translated without code changes. Code refers to strings by key (`t('tasks.empty')`), and each language has a file mapping keys to text (`en.json`: `"empty": "Nothing due today"`, `es.json`: `"empty": "Nada pendiente para hoy"`). Dates and numbers are formatted by the browser's `Intl` API for the user's locale, because "10/03" means different days in different countries. *Localisation* (l10n) is the work of producing each language's version.
+
+### Test pyramid
+A guide for how many tests to write at each level. The base is lots of fast **unit tests** (one function, no database or network). The middle is fewer **integration tests** (several parts working together, e.g. an HTTP handler with a real database). The top is a handful of slow **end-to-end tests** (a real browser clicking through the app). The higher the level, the more confidence each test gives, and the slower and more fragile it is.
+
+### CI (continuous integration)
+Running the checks (format, lint, build, tests) automatically on every push and pull request, on a clean machine, so "works on my machine" problems show up before merging. In GitHub Actions, a *workflow* (a YAML file in `.github/workflows/`) has *triggers* (`on: push`), *jobs* that run on fresh virtual machines (*runners*), and each job has *steps* (shell commands or reusable *actions*).
+
 _(More entries are added with each milestone: indexes, argon2, OpenAPI, Go interfaces, error wrapping, goroutines, …)_
 
 ---
@@ -162,3 +195,6 @@ _(More entries are added with each milestone: indexes, argon2, OpenAPI, Go inter
 - [PostgreSQL documentation](https://www.postgresql.org/docs/)
 - [RFC 9457: Problem Details for HTTP APIs](https://www.rfc-editor.org/rfc/rfc9457)
 - [WCAG 2.2 contrast minimum](https://www.w3.org/WAI/WCAG22/Understanding/contrast-minimum.html)
+- [Go testing package](https://pkg.go.dev/testing) · [Vitest](https://vitest.dev/) · [Vue Test Utils](https://test-utils.vuejs.org/) · [MSW](https://mswjs.io/) · [Playwright](https://playwright.dev/)
+- [GitHub Actions documentation](https://docs.github.com/en/actions)
+- [vue-i18n](https://vue-i18n.intlify.dev/) · [MDN: Intl](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl)

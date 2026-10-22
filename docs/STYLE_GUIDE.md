@@ -130,3 +130,6 @@ Dim Grey is a mid-tone, so text on it has little contrast headroom. On dark card
 | Pair every status colour with an icon or word | Rely on red/green alone |
 | Add new colours as tokens in `tokens.css`, then rerun the script | Hard-code hex values in components |
 | Test both themes (`data-theme="light"` / `"dark"` on `<html>`) | Assume the OS theme is light |
+| Leave room for text ~40% longer than English (buttons, tabs, labels wrap or grow) | Give text a fixed width that only fits English |
+| Use CSS logical properties (`margin-inline-start`, `padding-inline`) | Use `left`/`right` for spacing that should flip in right-to-left languages |
+| Take all text, including `aria-label`, from the locale files | Put words inside icons or images |
