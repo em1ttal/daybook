@@ -9,10 +9,12 @@ daybook/
 ├── package.json         # root: npm workspaces ["web"]; npm run dev|build|lint|format forward to web/
 ├── package-lock.json    # one lockfile for every workspace
 ├── web/                 # the Vue 3 + Vite front end (workspace "@daybook/web")
+│   ├── CLAUDE.md        # rules for the AI assistant when working in web/
 │   ├── package.json, index.html, vite.config.js, eslint.config.js, jsconfig.json
 │   ├── public/          # static files copied as-is (favicon)
 │   └── src/             # main.js, App.vue, router/, views/, components/, services/ (fake API),
 │                        # data/ (mock data), styles/tokens.css, utils/
+├── server/CLAUDE.md     # the Go plan; the code starts in M0
 ├── docs/                # these docs (start at docs/README.md)
 ├── scripts/check-contrast.mjs
 ├── .editorconfig, .prettierrc.json, .gitattributes, .vscode/   # shared by every package

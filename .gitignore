@@ -28,3 +28,6 @@ coverage
 *.sw?
 
 *.tsbuildinfo
+
+# Local uploads in dev (see docs/architecture/files-and-images.md)
+var/
