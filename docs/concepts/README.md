@@ -4,7 +4,7 @@ Short explanations that the rest of the docs link to, grouped by topic. Each ent
 
 - [Git](git.md): `git mv`, monorepos, workspaces
 - [Go](go.md): context, and the idioms met along the way
-- [Databases](databases.md): migrations, transactions
+- [Databases](databases.md): migrations, transactions, composite foreign keys, UUIDv7, object storage
 - [HTTP](http.md): CORS
 - [Security](security.md): sessions vs tokens
 - [Testing and CI](testing-and-ci.md): test pyramid, continuous integration

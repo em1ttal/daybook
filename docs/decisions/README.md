@@ -11,9 +11,13 @@ Each design decision gets one short file (an *ADR*, architecture decision record
 | [0005](0005-cookie-sessions.md) | Auth: server-side sessions in a cookie | accepted |
 | [0006](0006-position-gaps.md) | Ordering tasks: integer positions with gaps | accepted |
 | [0007](0007-visual-identity.md) | Visual identity: Ivory/Fern light, Dim Grey/Lavender dark | accepted |
-| [0008](0008-multilingual.md) | Multilingual from the start | accepted |
+| [0008](0008-multilingual.md) | Multilingual from the start | accepted (location superseded by 0012) |
 | [0009](0009-testing-strategy.md) | Testing strategy: a test pyramid | accepted |
 | [0010](0010-ci-by-hand.md) | CI: rebuild the workflow by hand | accepted |
+| [0011](0011-file-storage.md) | Files: metadata in Postgres, bytes in object storage | accepted |
+| [0012](0012-locale-folders.md) | Languages: one folder per locale at the repo root | accepted |
+| [0013](0013-colour-keys.md) | User-picked colours are palette keys | accepted |
+| [0014](0014-docs-structure.md) | Docs: many short files | accepted |
 
 ## Template
 

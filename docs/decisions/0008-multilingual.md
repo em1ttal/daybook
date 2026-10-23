@@ -1,5 +1,5 @@
 # 0008 · Multilingual from the start
-*2026-10-23 · accepted*
+*2026-10-23 · accepted; the file location is superseded by [0012](0012-locale-folders.md)*
 
 - **Context:** the old UI is hard-coded in Spanish, the portfolio audience is international, and I want daybook to support more languages later.
 - **Options:** hard-code English now and add i18n "later", or plan for it from the start.
