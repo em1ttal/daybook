@@ -29,6 +29,8 @@ So design the API for **multiple clients**: web (cookie sessions) now, iOS/macOS
 
 ## 2. Current code — what you'll find
 
+The Vue app lives in `web/` (an npm workspace); all paths below are relative to `web/`. Repo-wide config (`.editorconfig`, `.prettierrc.json`, `.gitattributes`, `.vscode/`) stays at the root.
+
 ```
 index.html                  # lang="es", title "KanbanIA"
 src/
@@ -52,7 +54,7 @@ Key facts:
 - Note: `BoardView` defaults `checklists: []` while data uses a single `checklist` object — normalise this in the new model.
 - Tooling: Vite 6, ESLint 9 + oxlint + Prettier (`npm run lint`, `npm run format`). No tests yet. No TypeScript yet. No CI yet.
 - UI strings are hard-coded in Spanish inside components. These move into locale JSON files (see §3 "Internationalisation").
-- Styling today: scoped CSS, dark gradient theme (`#1a1a2e → #16213e`), glassy cards. **This is being replaced** by the daybook identity in `docs/STYLE_GUIDE.md` (Ivory/Fern light, Dim Grey/Lavender dark) with tokens in `src/styles/tokens.css`. New or touched UI uses semantic tokens only (`var(--color-*)`), never raw hex. Run `node scripts/check-contrast.mjs` after changing any colour.
+- Styling today: scoped CSS, dark gradient theme (`#1a1a2e → #16213e`), glassy cards. **This is being replaced** by the daybook identity in `docs/STYLE_GUIDE.md` (Ivory/Fern light, Dim Grey/Lavender dark) with tokens in `web/src/styles/tokens.css`. New or touched UI uses semantic tokens only (`var(--color-*)`), never raw hex. Run `node scripts/check-contrast.mjs` after changing any colour.
 - The inherited GitHub Pages workflow (`.github/workflows/deploy.yml`) has been **removed** on purpose. CI is rebuilt by hand as a learning exercise (see §3 "CI"). The old KanbanIA build may still be live on Pages from `main`. If a Pages deploy comes back, `vite.config.js` `base` must match the repo name (`/daybook/`).
 
 ## 3. Target architecture (step 1)
@@ -187,7 +189,7 @@ The app is planned from the start to support several languages. **English (`en`)
 ## 4. Milestones (do them in order, one PR each)
 
 **M0 — Repo prep**
-- [ ] Move the Vue app into `web/` with `git mv` (including `src/styles/tokens.css`); root `package.json` with npm workspaces (`["web"]`) and scripts (`dev`, `lint`, `test`, `db:up`, `db:migrate`, `db:seed`) that call the Makefile for Go/DB tasks.
+- [x] Move the Vue app into `web/` with `git mv` (including `src/styles/tokens.css`); root `package.json` with npm workspaces (`["web"]`) and scripts (`dev`, `build`, `preview`, `lint`, `format`). `test` and `db:*` scripts are added when the Makefile and the things they run exist (M0 step 2 / M1).
 - [ ] `server/` Go module skeleton: `go mod init github.com/em1ttal/daybook/server`, `cmd/api/main.go` serving `GET /health`, root `Makefile`.
 - [ ] `.gitignore` (node_modules, dist, `.env*` except `.env.example`), `.nvmrc`, `.editorconfig`.
 - [ ] Decide language policy (see §6) and note it in README.

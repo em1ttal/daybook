@@ -54,6 +54,38 @@ flowchart LR
   SPEC -. swift-openapi-generator .-> I
 ```
 
+### Repository layout (today)
+This tree is updated whenever the structure changes. Folders marked *planned* don't exist yet.
+
+```
+daybook/
+├── package.json         # root: npm workspaces ["web"]; `npm run dev|build|lint|format` forward to web/
+├── package-lock.json    # one lockfile for every workspace
+├── web/                 # the Vue 3 + Vite front end (workspace "@daybook/web")
+│   ├── package.json     # web's own dependencies and scripts
+│   ├── index.html       # Vite entry page
+│   ├── vite.config.js   # base path /daybook/ (GitHub Pages), "@" alias → web/src
+│   ├── eslint.config.js, jsconfig.json
+│   ├── public/          # static files copied as-is (favicon)
+│   └── src/
+│       ├── main.js, App.vue
+│       ├── router/      # routes + auth guard
+│       ├── views/       # one component per page (Home, Login, Dashboard, Board)
+│       ├── components/  # home/, dashboard/, board/ building blocks
+│       ├── services/    # the "API" layer; fake today, real fetch calls in M3
+│       ├── data/        # in-memory mock data (deleted in M3)
+│       ├── styles/tokens.css  # daybook colour/space tokens (see STYLE_GUIDE.md)
+│       └── utils/
+├── server/              # planned (M0 step 2): Go API
+├── docs/
+│   ├── LEARNING.md      # this file
+│   └── STYLE_GUIDE.md   # visual identity and contrast rules
+├── scripts/check-contrast.mjs   # prints WCAG contrast ratios for the palette
+├── .editorconfig, .prettierrc.json, .gitattributes, .vscode/   # shared by every package
+├── CLAUDE.md            # instructions for the AI assistant: plan, stack, conventions
+└── README.md, LICENSE
+```
+
 ### Life of a request (target design)
 Here is what happens when the web app loads today's tasks with `GET /api/v1/tasks?due=today`:
 
@@ -121,16 +153,35 @@ Short records in the format *context → options → choice → why*. New decisi
 Every chapter uses the same template: **Goal · What I built · Concepts · Try it yourself · Gotchas · What I'd do differently**.
 
 ### M0 · Repo prep
-*Status: not started*
+*Status: in progress (step 1 of 4 done)*
 
 - **Goal:** turn a single Vue app into a monorepo with `web/` and `server/` folders, and add shared tooling.
-- **What I built:** _(to be filled in)_ Renamed the project to **daybook**, moved the Vue app with `git mv`, set up npm workspaces for `web/`, a Go module in `server/`, and a root Makefile.
-- **Concepts:** _`git mv` and why it keeps file history · monorepos and workspaces · `.editorconfig` / `.nvmrc`_
-- **Try it yourself:** _(commands)_
+- **What I built:**
+  - Renamed the project to **daybook** and removed the inherited Pages workflow (see D10).
+  - Moved the Vue app into `web/` with `git mv`. Repo-wide config (`.editorconfig`, `.prettierrc.json`, `.gitattributes`, `.vscode/`) stayed at the root, because those tools search parent folders for their config file.
+  - Added a root `package.json` that declares `web` as an npm workspace, and deleted the two stale lockfiles (`bun.lockb`, the old `package-lock.json`) so there is one fresh lockfile at the root.
+  - _Still to do: Go module in `server/` with `GET /health`, root Makefile, `.nvmrc`, `.gitignore` for `.env`._
+- **Concepts:**
+  - **`git mv` and history.** Git doesn't really record renames. It stores snapshots and *detects* a rename when a deleted file and an added file have nearly the same content. `git mv` is `mv` plus `git add`, and moving files *without editing them in the same commit* keeps the content identical, so `git log --follow web/src/App.vue` still shows the file's history from before the move.
+  - **Monorepo.** One repository holding several projects (here a Vue app now, a Go API next). Cross-cutting changes, like an API change plus the frontend that uses it, land in one PR.
+  - **npm workspaces.** The root `package.json` lists sub-packages:
+    ```json
+    "workspaces": ["web"],
+    "scripts": { "dev": "npm run dev -w web" }
+    ```
+    `npm install` at the root installs every workspace into one shared `node_modules` with one `package-lock.json`. `-w web` runs a script inside that workspace. The Go server is *not* a workspace: Go has its own module system (`go.mod`), and the root scripts will call it through the Makefile.
+- **Try it yourself:**
+  ```bash
+  npm install                         # from the repo root
+  npm run dev                         # → http://localhost:5173/daybook/
+  git log --follow --oneline web/src/App.vue   # history survives the move
+  npm ls --workspaces                 # what each workspace depends on
+  ```
 - **Gotchas:**
   - Renaming the GitHub repo redirects Git URLs but **not** GitHub Pages, so Vite's `base` path had to change from `/FH-p4-b3/` to `/daybook/`.
   - After moving the folder, my local `dev` branch was still tracking `origin/main`, so a plain `git push` went to `main`. Check with `git status -sb` (it shows `dev...origin/dev`) and fix with `git branch --set-upstream-to=origin/dev`.
   - Undoing that push meant moving `main` back with `git push --force-with-lease`. A `git revert` would have been wrong here: when `dev` is merged later, the revert commit would silently undo dev's changes. `--force-with-lease` only overwrites the branch if it is still at the commit you expect.
+  - oxlint's `--ignore-path .gitignore` is resolved from the folder the command runs in. After the move, scripts run inside `web/`, so it became `--ignore-path ../.gitignore`.
   - Any push to `main`, including a force push, re-runs the workflows triggered by it. Moving `main` back rebuilt the old Pages site with the old `base` path and broke the live demo. Workflows react to *every* push, not just the ones you meant.
 - **What I'd do differently:** _(to be filled in)_
 
