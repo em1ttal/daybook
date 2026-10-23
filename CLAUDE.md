@@ -22,7 +22,7 @@ So design the API for **multiple clients**: web (cookie sessions) now, iOS/macOS
 - **Go is new to Eshaan.** When code introduces a Go idiom for the first time (interfaces, `context.Context`, error wrapping with `%w` / `errors.Is`, goroutines, struct embedding, `defer`, generics), explain it briefly. Write idiomatic Go (small interfaces, errors as values, no panics for control flow), not TypeScript in Go syntax.
 - **Testing and CI are learning goals too**, not chores. Eshaan wants to learn how to test a backend and a frontend properly, and how to build GitHub Actions pipelines from scratch. Write tests alongside each feature (not in a batch at the end), explain *what kind* of test it is and why that level was chosen, and build CI workflows by hand, one job at a time, explaining each step. See §3 "Testing strategy" and "CI".
 - **The app is multilingual by design.** No user-facing string is hard-coded in components, Go code or native apps: every string lives in a per-language JSON file and is looked up by key. See §3 "Internationalisation".
-- **`docs/LEARNING.md` is the living build log and portfolio write-up.** A milestone isn't done until its chapter there is filled in (goal, what was built, concepts with small excerpts from this repo, "try it yourself" commands, gotchas, what I'd do differently), new glossary entries are added, and any design choice is recorded in the decision log (append, never rewrite). Write it for a reader new to the topic. If it passes ~1,500 lines, split it into `docs/learning/*.md` with an index.
+- **`docs/` (start at `docs/README.md`) is the living build log and portfolio write-up.** A milestone isn't done until its chapter there is filled in (goal, what was built, concepts with small excerpts from this repo, "try it yourself" commands, gotchas, what I'd do differently), new glossary entries are added, and any design choice is recorded in the decision log (append, never rewrite). Write it for a reader new to the topic, in short files.
 - Prefer small, reviewable steps over large rewrites. One milestone task per session/PR.
 - When there's a real design choice, state the options and trade-offs in 2–3 lines, recommend one, and ask before going ahead if it's hard to reverse.
 - Don't add dependencies without saying what they're for.
@@ -54,7 +54,7 @@ Key facts:
 - Note: `BoardView` defaults `checklists: []` while data uses a single `checklist` object — normalise this in the new model.
 - Tooling: Vite 6, ESLint 9 + oxlint + Prettier (`npm run lint`, `npm run format`). No tests yet. No TypeScript yet. No CI yet.
 - UI strings are hard-coded in Spanish inside components. These move into locale JSON files (see §3 "Internationalisation").
-- Styling today: scoped CSS, dark gradient theme (`#1a1a2e → #16213e`), glassy cards. **This is being replaced** by the daybook identity in `docs/STYLE_GUIDE.md` (Ivory/Fern light, Dim Grey/Lavender dark) with tokens in `web/src/styles/tokens.css`. New or touched UI uses semantic tokens only (`var(--color-*)`), never raw hex. Run `node scripts/check-contrast.mjs` after changing any colour.
+- Styling today: scoped CSS, dark gradient theme (`#1a1a2e → #16213e`), glassy cards. **This is being replaced** by the daybook identity in `docs/design/style-guide.md` (Ivory/Fern light, Dim Grey/Lavender dark) with tokens in `web/src/styles/tokens.css`. New or touched UI uses semantic tokens only (`var(--color-*)`), never raw hex. Run `node scripts/check-contrast.mjs` after changing any colour.
 - The inherited GitHub Pages workflow (`.github/workflows/deploy.yml`) has been **removed** on purpose. CI is rebuilt by hand as a learning exercise (see §3 "CI"). The old KanbanIA build may still be live on Pages from `main`. If a Pages deploy comes back, `vite.config.js` `base` must match the repo name (`/daybook/`).
 
 ## 3. Target architecture (step 1)
@@ -122,7 +122,7 @@ repo/
 | i18n (native, later) | Xcode **String Catalogs** (`.xcstrings`, JSON) | Step 3. Same keys as the web where practical. |
 | Lint | `golangci-lint`, `go vet`, `gofmt` | |
 | Dev reload | `air` | |
-| **Huma spike** (after M2) | On a throwaway branch, re-implement `/health` + lists with **Huma** (code-first) to compare with spec-first | Don't merge. Write the comparison in `docs/LEARNING.md`. |
+| **Huma spike** (after M2) | On a throwaway branch, re-implement `/health` + lists with **Huma** (code-first) to compare with spec-first | Don't merge. Write the comparison in the docs. |
 | Frontend state | **Pinia** (add) | Replace ad-hoc refs shared across views. |
 | Calendar | FullCalendar (`@fullcalendar/vue3`, daygrid/timegrid/interaction) or Schedule-X | Verify licences of the plugins used (drag-and-drop must be free/MIT). Ask Eshaan if unsure. |
 | Dates | Store `timestamptz` (UTC) in DB; display in user's time zone (default `Europe/Madrid`); date-only fields as `date` | |
@@ -206,7 +206,7 @@ The app is planned from the start to support several languages. **English (`en`)
 - [ ] Auth (register/login/logout/me, argon2id, cookie sessions, rate-limited login).
 - [ ] Lists, statuses, tasks, labels, checklist: spec → sqlc queries → service → handler.
 - [ ] Tests, written with each domain (see "Testing strategy"): unit tests for pure logic; integration tests for auth flow, CRUD happy paths, **cross-user access returns 404**, move-task transaction, validation errors (problem+json `code`s); responses validated against the spec. A test DB helper (`internal/testutil`) that migrates `daybook_test` and isolates tests.
-- [ ] **First CI workflow, by hand** (`.github/workflows/server.yml`): on push/PR → checkout, `setup-go` (version from `go.mod`), `gofmt` check, `go vet`, `golangci-lint`, `make gen` + `git diff --exit-code` (generated code is up to date), `go test` with a Postgres service container. Explain each step in LEARNING.md.
+- [ ] **First CI workflow, by hand** (`.github/workflows/server.yml`): on push/PR → checkout, `setup-go` (version from `go.mod`), `gofmt` check, `go vet`, `golangci-lint`, `make gen` + `git diff --exit-code` (generated code is up to date), `go test` with a Postgres service container. Explain each step in the docs.
 - [ ] (After M2, optional) Huma spike, see the stack table.
 
 **M3 — Frontend on the real API**
@@ -219,7 +219,7 @@ The app is planned from the start to support several languages. **English (`en`)
 
 **M4 — Planner pivot**
 - [ ] Rename boards → lists in UI/routes (`/lists/:id`), remove members/avatars/collaboration UI.
-- [ ] Reskin to the daybook identity: import `tokens.css` globally, replace the `#1a1a2e` gradient/glass styles with semantic tokens, add a light/dark/system theme toggle (sets `data-theme` on `<html>`; persisting the choice in `localStorage` is fine because it isn't auth data). Follow `docs/STYLE_GUIDE.md`.
+- [ ] Reskin to the daybook identity: import `tokens.css` globally, replace the `#1a1a2e` gradient/glass styles with semantic tokens, add a light/dark/system theme toggle (sets `data-theme` on `<html>`; persisting the choice in `localStorage` is fine because it isn't auth data). Follow `docs/design/style-guide.md`.
 - [ ] Calendar view (`/calendar`): month/week/day, shows tasks with `scheduled_start` (time blocks) and `due_date` (all-day markers); drag to reschedule; click empty slot to create.
 - [ ] Today/Agenda view (`/today`): overdue, due today, scheduled today.
 - [ ] Replace the marketing landing page with a redirect to `/today` when logged in.
@@ -229,8 +229,8 @@ The app is planned from the start to support several languages. **English (`en`)
 - [ ] README: what it is, screenshots/GIF, features, stack, architecture diagram (Mermaid), "Run locally" in ≤3 commands (`npm i`, `npm run db:up && npm run db:migrate && npm run db:seed`, `npm run dev`), demo credentials, roadmap (steps 2–5).
 - [ ] Playwright E2E for the critical flows (in `en` and `es`), run in CI against the API + Postgres.
 - [ ] CI polish: required status checks on `main`, caching, a demo deploy workflow (GitHub Pages or Cloudflare) written by hand.
-- [ ] `docs/LEARNING.md` polished as the portfolio write-up and linked from the README.
-- [ ] Spanish translations of the README and LEARNING.md (`README.es.md`, `docs/es/`), following the docs rules in "Internationalisation".
+- [ ] The docs polished as the portfolio write-up and linked from the README.
+- [ ] Spanish translations of the README and the docs (`README.es.md`, `docs/es/`), following the docs rules in "Internationalisation".
 - [ ] MIT licence; no real personal data anywhere in the repo or its history.
 
 Later (step 2, not now): Dockerfile for the API (multi-stage), production compose with Caddy, deploy workflow, backups.

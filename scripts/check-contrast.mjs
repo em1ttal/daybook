@@ -1,4 +1,4 @@
-// Prints WCAG 2.x contrast ratios for the colour pairings used in docs/STYLE_GUIDE.md.
+// Prints WCAG 2.x contrast ratios for the colour pairings used in docs/design/style-guide.md.
 // Usage: node scripts/check-contrast.mjs
 // AA thresholds: 4.5 for body text, 3.0 for large text (≥24px, or ≥18.66px bold) and UI parts.
 

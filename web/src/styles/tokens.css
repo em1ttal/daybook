@@ -1,5 +1,5 @@
 /*
- * daybook design tokens. See docs/STYLE_GUIDE.md for usage rules and contrast ratios.
+ * daybook design tokens. See docs/design/style-guide.md for usage rules and contrast ratios.
  * Components use only the semantic tokens (--color-*, --space-*, ...), never raw hex values.
  * Theme selection: follows the OS by default; set <html data-theme="light|dark"> to force one.
  * Not imported yet: applying it to the app is an M4 task.

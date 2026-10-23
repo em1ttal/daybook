@@ -1,8 +1,8 @@
 # daybook style guide
 
 The visual rules for daybook's web app. The future iOS and macOS apps should follow the same palette and semantic roles.
-Tokens live in [`src/styles/tokens.css`](../src/styles/tokens.css). Contrast ratios below come from
-[`scripts/check-contrast.mjs`](../scripts/check-contrast.mjs), so rerun it whenever you change a colour:
+Tokens live in [`web/src/styles/tokens.css`](../../web/src/styles/tokens.css). Contrast ratios below come from
+[`scripts/check-contrast.mjs`](../../scripts/check-contrast.mjs), so rerun it whenever you change a colour:
 
 ```bash
 node scripts/check-contrast.mjs   # exits non-zero if any pairing fails WCAG AA
