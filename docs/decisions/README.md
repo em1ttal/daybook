@@ -18,6 +18,7 @@ Each design decision gets one short file (an *ADR*, architecture decision record
 | [0012](0012-locale-folders.md) | Languages: one folder per locale at the repo root | accepted |
 | [0013](0013-colour-keys.md) | User-picked colours are palette keys | accepted |
 | [0014](0014-docs-structure.md) | Docs: many short files | accepted |
+| [0015](0015-security-learning-track.md) | Security as a learning track | accepted |
 
 ## Template
 

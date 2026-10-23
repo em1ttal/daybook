@@ -6,7 +6,7 @@ Short explanations that the rest of the docs link to, grouped by topic. Each ent
 - [Go](go.md): context, and the idioms met along the way
 - [Databases](databases.md): migrations, transactions, composite foreign keys, UUIDv7, object storage
 - [HTTP](http.md): CORS
-- [Security](security.md): sessions vs tokens
+- [Security](security.md): sessions vs tokens, threat model, hashing, XSS, CSRF, CSP, TLS, least privilege, supply chain
 - [Testing and CI](testing-and-ci.md): test pyramid, continuous integration
 - [i18n](i18n.md): internationalisation
 
