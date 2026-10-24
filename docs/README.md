@@ -13,7 +13,7 @@
 | Folder | What's in it |
 |---|---|
 | [product/](product/vision.md) | [Vision and roadmap](product/vision.md) · [features and screens](product/features.md) |
-| [architecture/](architecture/overview.md) | [Overview](architecture/overview.md) · [repository layout](architecture/repository.md) · [data model](architecture/data-model.md) · [API](architecture/api.md) · [files and images](architecture/files-and-images.md) · [i18n](architecture/i18n.md) |
+| [architecture/](architecture/overview.md) | [Overview](architecture/overview.md) · [repository layout](architecture/repository.md) · [Go server layout](architecture/server-layout.md) · [data model](architecture/data-model.md) · [API](architecture/api.md) · [files and images](architecture/files-and-images.md) · [i18n](architecture/i18n.md) |
 | [design/](design/style-guide.md) | [Style guide](design/style-guide.md) · [icon](design/icon.md) |
 | [security/](security/README.md) | Threat model, then one checklist per area: backend, frontend, files, cloud, native apps, CI |
 | [decisions/](decisions/README.md) | One short record per design decision (append-only) |

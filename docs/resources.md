@@ -1,6 +1,7 @@
 # Resources
 
 - [Go tour](https://go.dev/tour/) and [Effective Go](https://go.dev/doc/effective_go)
+- [Organizing a Go module](https://go.dev/doc/modules/layout) (official) · [golang-standards/project-layout](https://github.com/golang-standards/project-layout) (community, not official)
 - [OpenAPI 3.1 specification](https://spec.openapis.org/oas/v3.1.0)
 - [oapi-codegen](https://github.com/oapi-codegen/oapi-codegen) · [sqlc](https://docs.sqlc.dev/) · [goose](https://github.com/pressly/goose) · [pgx](https://github.com/jackc/pgx) · [Huma](https://huma.rocks/)
 - [PostgreSQL documentation](https://www.postgresql.org/docs/)

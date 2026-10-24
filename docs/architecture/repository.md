@@ -68,6 +68,7 @@ daybook/
 
 ### Why these places
 - **`locales/` and `brand/` at the root**, not inside `web/`: the Apple apps (and the server, for error codes) use the same files. See [i18n](i18n.md).
+- **`server/` follows the Go team's layout guide**: `cmd/` for programs, `internal/` for everything else, packages split by domain. Why, and how it compares with golang-standards/project-layout: [server-layout.md](server-layout.md).
 - **`server/` is not an npm workspace.** Go has its own module system. The root `package.json` and the `Makefile` are the single entry point for commands.
 - **`apple/` holds one Xcode project** with an iOS target and a macOS target, sharing most SwiftUI code. Steps 3 and 4 build in the same folder.
 - **`infra/`** holds only deployment files. The API's `Dockerfile` lives in `server/`, next to the code it builds.

@@ -18,7 +18,7 @@ Each milestone gets a chapter, written as it's built, with the same template: **
 ## M0 · Repo prep
 - [x] Move the Vue app into `web/` with `git mv`; root `package.json` with npm workspaces.
 - [x] Remove the inherited GitHub Pages workflow ([0010](../../decisions/0010-ci-by-hand.md)).
-- [ ] `server/` Go module: `go mod init github.com/em1ttal/daybook/server`, `cmd/api/main.go` serving `GET /health`, root `Makefile`, `npm run test` → `make test`.
+- [ ] `server/` Go module: `go mod init github.com/em1ttal/daybook/server`, `cmd/api/main.go` serving `GET /health`, root `Makefile`, `npm run test` → `make test`. Read [server-layout.md](../../architecture/server-layout.md) first.
 - [ ] `.gitignore` (`.env*` except `.env.example`, `var/`), `.nvmrc` + `engines` with the current Node LTS.
 - [ ] Fix the inherited lint errors so `npm run lint` passes.
 - [ ] Note the language policy in the README (code and docs in English, UI translated).

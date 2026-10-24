@@ -47,6 +47,7 @@ Write for a reader new to the topic. Keep files short (under ~200 lines); split 
 | Features and screens | [docs/product/features.md](docs/product/features.md) |
 | System overview, life of a request | [docs/architecture/overview.md](docs/architecture/overview.md) |
 | Repository layout, today and target | [docs/architecture/repository.md](docs/architecture/repository.md) |
+| How the Go server is organised, and why | [docs/architecture/server-layout.md](docs/architecture/server-layout.md) |
 | Database tables, keys, indexes | [docs/architecture/data-model.md](docs/architecture/data-model.md) |
 | API endpoints, errors, auth | [docs/architecture/api.md](docs/architecture/api.md) |
 | Files and images | [docs/architecture/files-and-images.md](docs/architecture/files-and-images.md) |

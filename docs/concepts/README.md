@@ -3,7 +3,7 @@
 Short explanations that the rest of the docs link to, grouped by topic. Each entry should make sense on its own.
 
 - [Git](git.md): `git mv`, monorepos, workspaces
-- [Go](go.md): context, and the idioms met along the way
+- [Go](go.md): context, modules and packages, `cmd/` and `internal/`, exported names
 - [Databases](databases.md): migrations, transactions, composite foreign keys, UUIDv7, object storage
 - [HTTP](http.md): CORS
 - [Security](security.md): sessions vs tokens, threat model, hashing, XSS, CSRF, CSP, TLS, least privilege, supply chain

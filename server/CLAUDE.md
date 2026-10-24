@@ -41,6 +41,8 @@ internal/
   testutil/            # test DB setup (daybook_test), fixtures
 Dockerfile             # step 2
 ```
+Why it's shaped this way (official Go layout guide vs golang-standards, packages by domain): [server-layout.md](../docs/architecture/server-layout.md). Keep `main.go` thin, add packages only when there's code for them, no `pkg/`, `utils/`, `common/` or `models/` packages.
+
 Design docs: [data model](../docs/architecture/data-model.md), [API](../docs/architecture/api.md), [files](../docs/architecture/files-and-images.md).
 
 ## Stack
