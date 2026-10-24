@@ -28,7 +28,7 @@ Each milestone gets a chapter, written as it's built, with the same template: **
 - [x] [Data model](../../architecture/data-model.md), [API](../../architecture/api.md), [files and images](../../architecture/files-and-images.md), [i18n](../../architecture/i18n.md), [repository layout](../../architecture/repository.md)
 - [x] [Security plan](../../security/README.md) and [setup guide](../../setup.md)
 - [x] Icon concepts, and the [selectable-icons design](../../design/icon.md)
-- [ ] Pick the default icon, then add the masters in `brand/icons/` and `scripts/gen-icons.mjs` (favicon set for the default)
+- [x] Three icons in `brand/icons/` (default: `monogram`) and `npm run icons` to export the favicons
 - [ ] Review the open questions in [features.md](../../product/features.md) and sign off
 
 ## M2 · Local database

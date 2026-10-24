@@ -10,6 +10,11 @@
     "build": "npm run build -w web",
     "preview": "npm run preview -w web",
     "lint": "npm run lint -w web",
-    "format": "npm run format -w web"
+    "format": "npm run format -w web",
+    "icons": "node scripts/gen-icons.mjs"
+  },
+  "devDependencies": {
+    "png-to-ico": "^3.0.2",
+    "sharp": "^0.35.5"
   }
 }

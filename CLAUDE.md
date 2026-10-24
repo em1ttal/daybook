@@ -85,6 +85,7 @@ npm run test                # from M0: go test; from M5: Vitest too
 npm run db:up | db:migrate | db:seed   # from M2: Postgres in Docker, goose, seed data
 make gen                    # from M3: oapi-codegen + sqlc (after editing openapi.yaml or queries/*.sql)
 node scripts/check-contrast.mjs        # after changing any colour
+npm run icons               # after changing anything in brand/icons/ (commit the output)
 ```
 Before reporting a task as done, run lint, build and tests (plus `go vet` and `go build ./...` once the server exists) and say what you ran.
 
