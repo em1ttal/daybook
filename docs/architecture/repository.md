@@ -33,7 +33,7 @@ daybook/
 ├── Makefile             # Go/DB tasks: gen, migrate, seed, test, lint             (M0)
 ├── docker-compose.yml   # Postgres for local dev                                  (M2)
 ├── .env.example, .nvmrc                                                           (M0)
-├── brand/               # icon master SVGs, shared by web and Apple apps          (M1)
+├── brand/icons/<id>/    # icon masters (light.svg, dark.svg), shared by web and Apple (M1)
 ├── locales/             # one folder per language: <code>/messages.json + flag.svg (M5)
 │   ├── en/
 │   └── es/

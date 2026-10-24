@@ -23,7 +23,7 @@ daybook is for **one person planning their own days**. It isn't a team tool: no 
 | Lists | `/lists` | All lists, with task counts. |
 | List board | `/lists/:id` | The kanban board: drag tasks between statuses. |
 | Task | modal on any screen | Edit every field, checklist, labels, attachments. |
-| Settings | `/settings` | Profile (name, picture), time zone, **language**, **theme** (light / dark / system), sessions ("log out other devices"). |
+| Settings | `/settings` | Profile (name, picture), time zone, **language**, **theme** (light / dark / system), **app icon**, sessions ("log out other devices"). |
 | Log in / Register | `/login`, `/register` | Register can be turned off on the public demo. |
 
 ## Key flows

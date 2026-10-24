@@ -8,7 +8,7 @@
   - [API](../../architecture/api.md): endpoints, status codes, problem+json error codes.
   - [Files and images](../../architecture/files-and-images.md): metadata in Postgres, bytes in object storage.
   - [i18n](../../architecture/i18n.md): one folder per language at the repo root.
-  - [Security plan](../../security/README.md), [setup guide](../../setup.md), [target repository layout](../../architecture/repository.md), and a new icon ([design/icon.md](../../design/icon.md)).
+  - [Security plan](../../security/README.md), [setup guide](../../setup.md), [target repository layout](../../architecture/repository.md), and selectable app icons ([design/icon.md](../../design/icon.md)).
 - **Concepts:**
   - **Design before code.** Changing a table after it has data needs a migration and sometimes a data fix. Changing a doc costs nothing.
   - **Composite foreign keys.** A status points at `(list_id, user_id)` on `lists`, not only `list_id`. The database itself guarantees that a child row and its parent belong to the same user:

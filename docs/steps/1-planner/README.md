@@ -27,7 +27,8 @@ Each milestone gets a chapter, written as it's built, with the same template: **
 - [x] [Features and screens](../../product/features.md)
 - [x] [Data model](../../architecture/data-model.md), [API](../../architecture/api.md), [files and images](../../architecture/files-and-images.md), [i18n](../../architecture/i18n.md), [repository layout](../../architecture/repository.md)
 - [x] [Security plan](../../security/README.md) and [setup guide](../../setup.md)
-- [x] New app icon in `brand/`
+- [x] Icon concepts, and the [selectable-icons design](../../design/icon.md)
+- [ ] Pick the default icon, then add the masters in `brand/icons/` and `scripts/gen-icons.mjs` (favicon set for the default)
 - [ ] Review the open questions in [features.md](../../product/features.md) and sign off
 
 ## M2 · Local database
@@ -65,7 +66,7 @@ Each milestone gets a chapter, written as it's built, with the same template: **
 - [ ] Boards → lists in UI and routes; remove members, avatars of others, collaboration UI.
 - [ ] Reskin to the [style guide](../../design/style-guide.md): tokens everywhere, light/dark/system theme toggle.
 - [ ] Today (`/today`) and Calendar (`/calendar`: month/week/day, drag to reschedule, click to create).
-- [ ] Settings: profile and picture, time zone, language selector (flag + native name), theme, sessions.
+- [ ] Settings: profile and picture, time zone, language selector (flag + native name), theme, app icon picker, sessions.
 - [ ] Attachments in the task modal.
 - [ ] Finish i18n: no raw strings left, `es` complete, dates and calendar localised.
 - [ ] Replace the marketing landing page with a redirect to `/today` when logged in.
@@ -76,5 +77,5 @@ Each milestone gets a chapter, written as it's built, with the same template: **
 - [ ] Playwright end-to-end tests for the critical flows, in `en` and `es`, in CI.
 - [ ] CI polish: required checks on `main`, caching, Dependabot, CodeQL, a demo deploy workflow written by hand.
 - [ ] Docs polished; Spanish translations of the README and docs.
-- [ ] Licence; no real personal data anywhere in the repo or its history.
+- [ ] Choose a licence (learn the options first; until then the code is "all rights reserved" by default). No real personal data anywhere in the repo or its history.
 - [ ] **Step 1 security review**: the full [security checklist](../../security/README.md#step-checkpoints), written up.

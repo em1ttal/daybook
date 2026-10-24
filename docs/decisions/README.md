@@ -19,6 +19,7 @@ Each design decision gets one short file (an *ADR*, architecture decision record
 | [0013](0013-colour-keys.md) | User-picked colours are palette keys | accepted |
 | [0014](0014-docs-structure.md) | Docs: many short files | accepted |
 | [0015](0015-security-learning-track.md) | Security as a learning track | accepted |
+| [0016](0016-selectable-icons.md) | App icons: several, chosen by each user | accepted |
 
 ## Template
 
