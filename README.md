@@ -2,7 +2,7 @@
 
 A personal to-do app with a visual calendar: kanban lists, a calendar view and a "today" agenda, backed by a Go API and PostgreSQL.
 
-> 🚧 **Work in progress.** daybook began as **KanbanIA**, a group project for the university course *Human Factors in Computing* by [Alejandro Penalba](https://github.com/APenalba) and me. I'm now rebuilding it as a full-stack app to learn Go, PostgreSQL and cloud deployment.
+> 🚧 **Work in progress.** daybook began as **KanbanIA**, a group project for the university course *Human Factors in Computing* by [Alejandro Penalba](https://github.com/APenalba) and me. I'm now rebuilding it as a full-stack app to learn Go, iOS/macOS app development and cloud deployment.
 
 - **How it's being built, and what I'm learning:** [docs/](docs/README.md)
 - **Visual identity:** [docs/design/style-guide.md](docs/design/style-guide.md)
